@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Chúc Mừng 20/10</title>
+    <!-- Tailwind CSS for styling --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for elegant typography --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to apply the Google Fonts */
+        body {
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden; /* Ngăn thanh cuộn xuất hiện do cánh hoa */
+        }
+        .font-cursive {
+            font-family: 'Great Vibes', cursive;
+        }
+        /* Style for the card background image */
+        .card-bg-image {
+            background-image: url('https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+        /* --- Hiệu ứng Cánh hoa rơi (SỬ DỤNG SVG) --- */
+        .petal {
+            position: absolute;
+            top: -50px; /* Bắt đầu từ bên trên màn hình */
+            opacity: 0;
+            animation: fall linear infinite;
+            will-change: transform, opacity; /* Tối ưu hóa animation */
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(720deg); /* Rơi xuống dưới màn hình và xoay */
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-rose-100 via-orange-50 to-amber-100 min-h-screen flex items-center justify-center p-4 sm:p-6 relative">
+
+    <!-- Container cho các cánh hoa --><div id="petal-container" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+
+    <!-- Card Container: Vertical layout --><div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col transform hover:scale-105 transition-transform duration-500 z-10">
+
+        <!-- Top part: Image Section --><div class="w-full h-64 sm:h-72 card-bg-image">
+             <!-- This div serves as the image panel of the card --></div>
+
+        <!-- Bottom part: Text Content Section --><div class="w-full p-8 sm:p-10 flex flex-col justify-center">
+            
+            <!-- Main Title --><h1 class="font-cursive text-5xl sm:text-6xl text-pink-500 mb-4 text-center">
+                Chúc mừng
+            </h1>
+            <h2 class="text-2xl sm:text-3xl text-gray-700 font-semibold mb-8 text-center tracking-wider">
+                Ngày Phụ nữ Việt Nam
+            </h2>
+
+            <!-- Greeting Message --><div class="text-left text-gray-600 text-base sm:text-lg mb-6">
+                <p>Gửi bạn - quý cô xinh đẹp, tài năng,</p>
+            </div>
+
+            <!-- Main Wish --><p class="text-center text-gray-800 text-lg sm:text-xl font-medium mb-10 italic border-l-4 border-pink-300 pl-4">
+                Chúc bạn luôn rạng rỡ, xinh đẹp và ngập tràn hạnh phúc!
+            </p>
+
+            <!-- Sender --><p class="font-cursive text-4xl sm:text-5xl text-pink-400 self-end text-right mt-4">
+                Gửi từ Rosie
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const petalContainer = document.getElementById('petal-container');
+        const numberOfPetals = 30; // Số lượng cánh hoa
+        const svgNS = "http://www.w3.org/2000/svg"; // Namespace cho SVG
+
+        for (let i = 0; i < numberOfPetals; i++) {
+            const petalSVG = document.createElementNS(svgNS, "svg");
+            petalSVG.setAttribute('class', 'petal');
+            petalSVG.setAttribute('viewBox', '0 0 50 50');
+
+            const path = document.createElementNS(svgNS, "path");
+            path.setAttribute('d', 'M25,0 C-5,15 10,50 25,50 C40,50 55,15 25,0 Z');
+            
+            // **SỬA LỖI: TÔ MÀU TRỰC TIẾP BẰNG JAVASCRIPT ĐỂ ĐẢM BẢO HIỂN THỊ**
+            path.setAttribute('fill', '#fbcfe8'); // Màu hồng pastel mềm mại
+            
+            petalSVG.appendChild(path);
+            
+            // Ngẫu nhiên hóa các thuộc tính để trông tự nhiên hơn
+            petalSVG.style.left = Math.random() * 100 + 'vw';
+            petalSVG.style.animationDuration = (Math.random() * 8 + 7) + 's';
+            petalSVG.style.animationDelay = Math.random() * 10 + 's';
+            const size = Math.random() * 20 + 15;
+            petalSVG.style.width = size + 'px';
+            petalSVG.style.height = size + 'px';
+            petalSVG.style.opacity = Math.random() * 0.7 + 0.3;
+
+            petalContainer.appendChild(petalSVG);
+        }
+    </script>
+</body>
+</html>
+
